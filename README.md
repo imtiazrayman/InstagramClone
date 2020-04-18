@@ -2,7 +2,7 @@
 This is an instagram Clone written in Kotlin
 
 # User Interface
-![image](https://user-images.githubusercontent.com/61753398/79517314-d8eb6800-801b-11ea-9a52-6ef986f6adc1.png)
+![image](https://user-images.githubusercontent.com/61753398/79517304-d25cf080-801b-11ea-8076-d71b6bae502f.png)
 ![Screen Shot 2020-04-18 at 3 04 03 AM](https://user-images.githubusercontent.com/61753398/79631997-7fbe2a00-812a-11ea-965f-1ceb75ab5def.png)
 ![Screen Shot 2020-04-18 at 3 04 35 AM](https://user-images.githubusercontent.com/61753398/79631999-8056c080-812a-11ea-9078-4da9ae5edac6.png)
 ![Screen Shot 2020-04-18 at 3 04 57 AM](https://user-images.githubusercontent.com/61753398/79632001-80ef5700-812a-11ea-92c2-beed4449e2d9.png)
