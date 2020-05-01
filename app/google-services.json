@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "160363327023",
-    "firebase_url": "https://instaclone-dc8f4.firebaseio.com",
-    "project_id": "instaclone-dc8f4",
-    "storage_bucket": "instaclone-dc8f4.appspot.com"
+    "project_number": "831033511529",
+    "firebase_url": "https://instagramclone-2f107.firebaseio.com",
+    "project_id": "instagramclone-2f107",
+    "storage_bucket": "instagramclone-2f107.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:160363327023:android:f6d1be534fa77d6f6ee0da",
+        "mobilesdk_app_id": "1:831033511529:android:00c1a071e50f949e1e5cf8",
         "android_client_info": {
           "package_name": "com.example.instant"
         }
       },
       "oauth_client": [
         {
-          "client_id": "160363327023-cnq0a79i4j5k4ad382j9a71p68e9u0jh.apps.googleusercontent.com",
+          "client_id": "831033511529-jv1lmftb2a2nij4vjm2d24saoeek785j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.instant",
+            "certificate_hash": "c1b3c47e758aa93abe457a1693b8bbed28243a5e"
+          }
+        },
+        {
+          "client_id": "831033511529-bsievb5lic0825j45jl7c20c5tdcdfld.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCcKh5NGSAphaAiGExkXbH57lIonepN7_M"
+          "current_key": "AIzaSyCZz60d7mjc5L8TTo7t381Q8zOIUX9ZOlk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "160363327023-cnq0a79i4j5k4ad382j9a71p68e9u0jh.apps.googleusercontent.com",
+              "client_id": "831033511529-bsievb5lic0825j45jl7c20c5tdcdfld.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
