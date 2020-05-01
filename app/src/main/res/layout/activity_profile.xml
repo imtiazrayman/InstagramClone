@@ -100,7 +100,7 @@
             android:backgroundTint="#000000"
             android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/unnamed" />
+             />
 
         <Button
             android:id="@+id/button5"
@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/plueicon" />
+            />
 
         <Button
             android:id="@+id/button6"
