@@ -42,7 +42,8 @@ class MainActivity : AppCompatActivity() {
         toast2.show()
         // Access a Cloud Firestore instance from your Activity
         val db = Firebase.firestore
-        // Create a new user with a first and last name
+
+        // Create a new user with a first and last name //Ada
         val user = hashMapOf(
             "first" to "Ada",
             "last" to "Lovelace",
@@ -57,6 +58,12 @@ class MainActivity : AppCompatActivity() {
                 myToast.setGravity(Gravity.LEFT,200,200)
                 myToast.show()
 
+                /*val myIntent= Intent(this, ProfileActivity::class.java)
+                startActivity(myIntent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation*/
+
+
+
             }
             .addOnFailureListener { e ->
                 val toast = Toast.makeText(applicationContext, "fail",Toast.LENGTH_SHORT)
@@ -66,6 +73,6 @@ class MainActivity : AppCompatActivity() {
         //this button will take you into your profile page.
 //        val myIntent= Intent(this, ProfileActivity::class.java)
 //        startActivity(myIntent)
-//        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation
+//         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation
     }
 }

@@ -19,7 +19,8 @@ class DB {
             .addOnFailureListener { e ->
             }
     }
-    fun storeVideo(videoURL: String){
+    fun storeVideo(videoURL: String)
+    {
         db.collection("videos")
             .add(videoURL)
             .addOnSuccessListener { documentReference ->
@@ -27,7 +28,9 @@ class DB {
             .addOnFailureListener { e ->
             }
     }
-    fun retrieveAllImages(){
+
+    fun retrieveAllImages()
+    {
         val images = db.collection("images");
     }
     fun retrieveAllVideos(){
