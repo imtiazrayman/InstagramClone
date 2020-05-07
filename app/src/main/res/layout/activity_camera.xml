@@ -11,7 +11,6 @@
         android:id="@+id/textView4"
         android:layout_width="187dp"
         android:layout_height="54dp"
-        android:layout_marginTop="32dp"
         android:fontFamily="cursive"
         android:text="Instagram"
         android:textAlignment="center"
@@ -24,13 +23,11 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="392dp"
-        android:layout_height="85dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="389dp"
+        android:layout_height="80dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sign_out_button"
         app:layout_constraintVertical_bias="1.0">
@@ -74,42 +71,25 @@
             app:srcCompat="@drawable/personicon" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="363dp"
-        android:layout_height="255dp"
-        android:layout_marginBottom="64dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.821"
-        app:srcCompat="@drawable/bird" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="323dp"
         android:layout_height="70dp"
         android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.0">
 
         <ImageButton
             android:id="@+id/imageButton7"
             android:layout_width="80dp"
             android:layout_height="71dp"
+            android:onClick="FullSizedPictureIntent"
             app:srcCompat="@drawable/captureicon" />
 
         <ImageButton
@@ -124,7 +104,37 @@
             android:layout_width="77dp"
             android:layout_height="71dp"
             android:layout_marginStart="40dp"
+
+
             app:srcCompat="@drawable/paperplaneicon" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="345dp"
+        android:layout_height="370dp"
+        android:layout_marginBottom="28dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="270dp" />
+
+        <EditText
+            android:id="@+id/editText4"
+            android:layout_width="311dp"
+            android:layout_height="62dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="68dp"
+            android:ems="10"
+            android:hint="Comments"
+            android:inputType="textPersonName"
+            android:textSize="12sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

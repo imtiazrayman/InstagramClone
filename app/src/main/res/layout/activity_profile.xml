@@ -7,6 +7,57 @@
     android:background="#FFFFFF"
     tools:context=".ProfileActivity">
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="389dp"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_out_button"
+        app:layout_constraintVertical_bias="1.0">
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="71dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="20dp"
+            android:onClick="goHome"
+            app:srcCompat="@drawable/homeicon" />
+
+        <ImageButton
+            android:id="@+id/searchButton"
+            android:layout_width="69dp"
+            android:layout_height="68dp"
+            android:layout_marginBottom="164dp"
+            android:onClick="goSearch"
+            app:srcCompat="@drawable/search" />
+
+        <ImageButton
+            android:id="@+id/cameraButton"
+            android:layout_width="65dp"
+            android:layout_height="68dp"
+            android:onClick="goCamera"
+            android:layout_marginBottom="16dp"
+            app:srcCompat="@drawable/camera" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="70dp"
+            android:layout_height="68dp"
+            android:layout_marginBottom="16dp"
+            android:onClick="goLikes"
+            app:srcCompat="@drawable/heart" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="71dp"
+            android:layout_height="68dp"
+
+            app:srcCompat="@drawable/personicon" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/textView10"
         android:layout_width="187dp"
@@ -26,65 +77,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="392dp"
-        android:layout_height="85dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_out_button"
-        app:layout_constraintVertical_bias="1.0">
-
-        <ImageButton
-            android:id="@+id/imageButton4"
-            android:layout_width="71dp"
-            android:layout_height="68dp"
-            android:layout_marginStart="20dp"
-            android:onClick="goHome"
-            app:srcCompat="@drawable/homeicon" />
-
-        <ImageButton
-            android:id="@+id/imageButton6"
-            android:layout_width="69dp"
-            android:layout_height="68dp"
-            android:onClick="goSearch"
-            android:layout_marginBottom="164dp"
-            app:srcCompat="@drawable/search" />
-
-        <ImageButton
-            android:id="@+id/cameraButton"
-            android:layout_width="65dp"
-            android:layout_height="68dp"
-            android:onClick="goCamera"
-            android:layout_marginBottom="16dp"
-            app:srcCompat="@drawable/camera" />
-
-        <ImageButton
-            android:id="@+id/imageButton3"
-            android:layout_width="70dp"
-            android:layout_height="68dp"
-            android:onClick="goLikes"
-            android:layout_marginBottom="16dp"
-            app:srcCompat="@drawable/heart" />
-
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="71dp"
-            android:layout_height="68dp"
-            app:srcCompat="@drawable/personicon" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="372dp"
-        android:layout_height="161dp"
-        android:layout_marginBottom="4dp"
+        android:layout_width="285dp"
+        android:layout_height="112dp"
+        android:layout_marginBottom="24dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.41"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent">
 
         <TableLayout
@@ -155,8 +154,8 @@
         android:id="@+id/recyclerView2"
         android:layout_width="313dp"
         android:layout_height="252dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        android:layout_marginBottom="72dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

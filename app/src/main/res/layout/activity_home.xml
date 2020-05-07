@@ -8,6 +8,58 @@
     tools:context=".HomeActivity">
 
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="389dp"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_out_button"
+        app:layout_constraintVertical_bias="1.0">
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="71dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="20dp"
+            android:onClick="goHome"
+            app:srcCompat="@drawable/homeicon"
+            tools:ignore="OnClick" />
+
+        <ImageButton
+            android:id="@+id/searchButton"
+            android:layout_width="69dp"
+            android:layout_height="68dp"
+            android:layout_marginBottom="164dp"
+            android:onClick="goSearch"
+            app:srcCompat="@drawable/search" />
+
+        <ImageButton
+            android:id="@+id/cameraButton"
+            android:layout_width="65dp"
+            android:layout_height="68dp"
+            android:onClick="goCamera"
+            android:layout_marginBottom="16dp"
+            app:srcCompat="@drawable/camera" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="70dp"
+            android:layout_height="68dp"
+            android:layout_marginBottom="16dp"
+            android:onClick="goLikes"
+            app:srcCompat="@drawable/heart" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="71dp"
+            android:layout_height="68dp"
+            android:onClick="goProfile"
+            app:srcCompat="@drawable/personicon" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="187dp"
@@ -54,57 +106,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.446"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <LinearLayout
-        android:layout_width="392dp"
-        android:layout_height="85dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_out_button"
-        app:layout_constraintVertical_bias="1.0">
-
-        <ImageButton
-            android:id="@+id/homebutton"
-            android:layout_width="71dp"
-            android:layout_height="68dp"
-            android:layout_marginStart="20dp"
-            app:srcCompat="@drawable/homeicon" />
-
-        <ImageButton
-            android:id="@+id/searchButton"
-            android:layout_width="69dp"
-            android:onClick="goSearch"
-            android:layout_height="68dp"
-            android:layout_marginBottom="164dp"
-            app:srcCompat="@drawable/search" />
-
-        <ImageButton
-            android:id="@+id/CameraButton"
-            android:layout_width="65dp"
-            android:layout_height="68dp"
-            android:onClick="goCamera"
-            android:layout_marginBottom="16dp"
-            app:srcCompat="@drawable/camera" />
-
-        <ImageButton
-            android:id="@+id/LikesButton"
-            android:layout_width="70dp"
-            android:layout_height="68dp"
-            android:onClick="goLikes"
-            android:layout_marginBottom="16dp"
-            app:srcCompat="@drawable/heart" />
-
-        <ImageButton
-            android:id="@+id/ProfileButton"
-            android:layout_width="71dp"
-            android:onClick="goProfile"
-            android:layout_height="68dp"
-            app:srcCompat="@drawable/personicon" />
-    </LinearLayout>
 
     <TextView
         android:id="@+id/textView5"
