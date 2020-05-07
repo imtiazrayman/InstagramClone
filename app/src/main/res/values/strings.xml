@@ -11,4 +11,5 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="congrats_text">You have successfully logged in </string>
     <string name="sign_out_button">Sign Out</string>
+    <string name = "clientID">631004178134-g4ci9u2givgt9a7qg24argd7tafb2ecd.apps.googleusercontent.com</string>
 </resources>

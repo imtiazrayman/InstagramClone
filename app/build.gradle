@@ -1,7 +1,4 @@
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+
 
 android {
     compileSdkVersion 29
@@ -60,3 +57,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx:21.4.3'
 
 }
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'

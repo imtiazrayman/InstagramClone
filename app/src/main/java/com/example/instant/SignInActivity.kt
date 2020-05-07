@@ -16,6 +16,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
 class SignInActivity : AppCompatActivity() {
+    val clientID = "631004178134-g4ci9u2givgt9a7qg24argd7tafb2ecd.apps.googleusercontent.com"
     val RC_SIGN_IN: Int = 1
     lateinit var mGoogleSignInClient: GoogleSignInClient
     lateinit var mGoogleSignInOptions: GoogleSignInOptions
@@ -31,6 +32,7 @@ class SignInActivity : AppCompatActivity() {
     }
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
+        Toast.makeText(this, "credential is $credential", Toast.LENGTH_LONG).show()
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
                 startActivity(HomeActivity.getLaunchIntent(this))
