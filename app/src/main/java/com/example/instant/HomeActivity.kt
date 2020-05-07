@@ -3,6 +3,7 @@ package com.example.instant
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -55,5 +56,38 @@ class HomeActivity : AppCompatActivity() {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         }
     }
+    /*fun goHome(view: View) {
+        val myIntent= Intent(this, HomeActivity::class.java)
+        startActivity(myIntent)
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // slide back to the main activity
+    }*/
+
+    fun goSearch(view: View) {
+        val myIntent= Intent(this, SearchActivity::class.java)
+        startActivity(myIntent)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation
+    }
+
+
+    fun goCamera(view: View) {
+        val myIntent= Intent(this, CameraActivity::class.java)
+        startActivity(myIntent)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation
+    }
+
+    fun goLikes(view: View) {
+        val myIntent= Intent(this, LikesActivity::class.java)
+        startActivity(myIntent)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation
+    }
+
+    fun goProfile(view: View) {
+        val myIntent= Intent(this, ProfileActivity::class.java)
+        startActivity(myIntent)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation
+    }
+
+
+
 
 }

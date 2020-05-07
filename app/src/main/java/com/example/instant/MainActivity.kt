@@ -63,9 +63,9 @@ class MainActivity : AppCompatActivity() {
                 myToast.show()
 
                 // this is test code so i can see how the ui looks like since i cant sign in atm
-             /*   val myIntent= Intent(this, HomeActivity::class.java)
+               val myIntent= Intent(this, HomeActivity::class.java)
                 startActivity(myIntent)
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation*/
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation
 
 
                 /*val myIntent= Intent(this, ProfileActivity::class.java)
@@ -85,4 +85,6 @@ class MainActivity : AppCompatActivity() {
 //        startActivity(myIntent)
 //         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation
     }
+
+    fun goProfile(view: View) {}
 }

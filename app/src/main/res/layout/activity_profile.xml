@@ -8,6 +8,7 @@
     tools:context=".ProfileActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="392dp"
         android:layout_height="85dp"
         android:layout_marginBottom="16dp"
@@ -24,19 +25,22 @@
             android:layout_width="71dp"
             android:layout_height="68dp"
             android:layout_marginStart="20dp"
+            android:onClick="goHome"
             app:srcCompat="@drawable/homeicon" />
 
         <ImageButton
             android:id="@+id/imageButton6"
             android:layout_width="69dp"
             android:layout_height="68dp"
+            android:onClick="goSearch"
             android:layout_marginBottom="164dp"
             app:srcCompat="@drawable/search" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/cameraButton"
             android:layout_width="65dp"
             android:layout_height="68dp"
+            android:onClick="goCamera"
             android:layout_marginBottom="16dp"
             app:srcCompat="@drawable/camera" />
 
@@ -44,6 +48,7 @@
             android:id="@+id/imageButton3"
             android:layout_width="70dp"
             android:layout_height="68dp"
+            android:onClick="goLikes"
             android:layout_marginBottom="16dp"
             app:srcCompat="@drawable/heart" />
 
@@ -61,10 +66,8 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -132,11 +135,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView2"
-        android:layout_width="399dp"
-        android:layout_height="291dp"
+        android:layout_width="313dp"
+        android:layout_height="252dp"
+        android:layout_marginBottom="68dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.416"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="267dp" />
+        app:layout_constraintHorizontal_bias="0.397"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

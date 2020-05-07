@@ -26,6 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="392dp"
         android:layout_height="85dp"
         android:layout_marginBottom="16dp"
@@ -42,17 +43,19 @@
             android:layout_width="71dp"
             android:layout_height="68dp"
             android:layout_marginStart="20dp"
+            android:onClick="goHome"
             app:srcCompat="@drawable/homeicon" />
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/searchButton"
             android:layout_width="69dp"
             android:layout_height="68dp"
+            android:onClick="goSearch"
             android:layout_marginBottom="164dp"
             app:srcCompat="@drawable/search" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/cameraButton"
             android:layout_width="65dp"
             android:layout_height="68dp"
             android:layout_marginBottom="16dp"
@@ -71,4 +74,26 @@
             android:layout_height="68dp"
             app:srcCompat="@drawable/personicon" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.67"
+        app:srcCompat="@drawable/bird" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

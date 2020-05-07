@@ -4,12 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".HomeActivity">
-
+    tools:context=".SearchActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView7"
         android:layout_width="187dp"
         android:layout_height="54dp"
         android:layout_marginTop="24dp"
@@ -25,37 +23,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:text="@string/congrats_text"
-        app:layout_constraintBottom_toTopOf="@+id/sign_out_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.753" />
-
-    <Button
-        android:id="@+id/sign_out_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="152dp"
-        android:text="@string/sign_out_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.446"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="392dp"
         android:layout_height="85dp"
         android:layout_marginBottom="16dp"
@@ -68,22 +37,22 @@
         app:layout_constraintVertical_bias="1.0">
 
         <ImageButton
-            android:id="@+id/homebutton"
+            android:id="@+id/imageButton4"
             android:layout_width="71dp"
             android:layout_height="68dp"
+            android:onClick="goHome"
             android:layout_marginStart="20dp"
             app:srcCompat="@drawable/homeicon" />
 
         <ImageButton
-            android:id="@+id/searchButton"
+            android:id="@+id/imageButton6"
             android:layout_width="69dp"
-            android:onClick="goSearch"
             android:layout_height="68dp"
             android:layout_marginBottom="164dp"
             app:srcCompat="@drawable/search" />
 
         <ImageButton
-            android:id="@+id/CameraButton"
+            android:id="@+id/cameraButton"
             android:layout_width="65dp"
             android:layout_height="68dp"
             android:onClick="goCamera"
@@ -91,27 +60,18 @@
             app:srcCompat="@drawable/camera" />
 
         <ImageButton
-            android:id="@+id/LikesButton"
+            android:id="@+id/imageButton3"
             android:layout_width="70dp"
             android:layout_height="68dp"
+            android:onClick="goLikes"
             android:layout_marginBottom="16dp"
             app:srcCompat="@drawable/heart" />
 
         <ImageButton
-            android:id="@+id/ProfileButton"
+            android:id="@+id/imageButton"
             android:layout_width="71dp"
             android:layout_height="68dp"
+            android:onClick="goProfile"
             app:srcCompat="@drawable/personicon" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="This is the feed"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
