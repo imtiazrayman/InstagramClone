@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".SearchActivity">
 
     <TextView
@@ -40,8 +41,8 @@
             android:id="@+id/imageButton4"
             android:layout_width="71dp"
             android:layout_height="68dp"
-            android:onClick="goHome"
             android:layout_marginStart="20dp"
+            android:onClick="goHome"
             app:srcCompat="@drawable/homeicon" />
 
         <ImageButton
@@ -55,16 +56,16 @@
             android:id="@+id/cameraButton"
             android:layout_width="65dp"
             android:layout_height="68dp"
-            android:onClick="goCamera"
             android:layout_marginBottom="16dp"
+            android:onClick="goCamera"
             app:srcCompat="@drawable/camera" />
 
         <ImageButton
             android:id="@+id/imageButton3"
             android:layout_width="70dp"
             android:layout_height="68dp"
-            android:onClick="goLikes"
             android:layout_marginBottom="16dp"
+            android:onClick="goLikes"
             app:srcCompat="@drawable/heart" />
 
         <ImageButton
@@ -74,4 +75,16 @@
             android:onClick="goProfile"
             app:srcCompat="@drawable/personicon" />
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="Search "
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 </androidx.constraintlayout.widget.ConstraintLayout>

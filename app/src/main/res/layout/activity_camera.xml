@@ -50,8 +50,8 @@
             android:id="@+id/searchButton"
             android:layout_width="69dp"
             android:layout_height="68dp"
-            android:onClick="goSearch"
             android:layout_marginBottom="164dp"
+            android:onClick="goSearch"
             app:srcCompat="@drawable/search" />
 
         <ImageButton
@@ -66,12 +66,14 @@
             android:layout_width="70dp"
             android:layout_height="68dp"
             android:layout_marginBottom="16dp"
+            android:onClick="goLikes"
             app:srcCompat="@drawable/heart" />
 
         <ImageButton
             android:id="@+id/imageButton"
             android:layout_width="71dp"
             android:layout_height="68dp"
+            android:onClick="goProfile"
             app:srcCompat="@drawable/personicon" />
     </LinearLayout>
 
@@ -83,8 +85,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.67"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
         app:srcCompat="@drawable/bird" />
 
     <TextView
@@ -96,4 +97,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="76dp"
+        android:layout_height="71dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:srcCompat="@drawable/galleryicon" />
+
+    <ImageButton
+        android:id="@+id/imageButton5"
+        android:layout_width="77dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toEndOf="@+id/imageButton2"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/paperplaneicon" />
+
+    <ImageButton
+        android:id="@+id/imageButton7"
+        android:layout_width="80dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.447"
+        app:srcCompat="@drawable/captureicon" />
 </androidx.constraintlayout.widget.ConstraintLayout>

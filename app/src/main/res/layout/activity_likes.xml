@@ -6,4 +6,87 @@
     android:layout_height="match_parent"
     tools:context=".LikesActivity">
 
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="187dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="cursive"
+        android:text="Likes"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <LinearLayout
+        android:layout_width="392dp"
+        android:layout_height="85dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_out_button"
+        app:layout_constraintVertical_bias="1.0">
+
+        <ImageButton
+            android:id="@+id/homebutton"
+            android:layout_width="71dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="20dp"
+            app:srcCompat="@drawable/homeicon" />
+
+        <ImageButton
+            android:id="@+id/searchButton"
+            android:layout_width="69dp"
+            android:layout_height="68dp"
+            android:layout_marginBottom="164dp"
+            android:onClick="goSearch"
+            app:srcCompat="@drawable/search" />
+
+        <ImageButton
+            android:id="@+id/CameraButton"
+            android:layout_width="65dp"
+            android:layout_height="68dp"
+            android:layout_marginBottom="16dp"
+            android:onClick="goCamera"
+            app:srcCompat="@drawable/camera" />
+
+        <ImageButton
+            android:id="@+id/LikesButton"
+            android:layout_width="70dp"
+            android:layout_height="68dp"
+            android:layout_marginBottom="16dp"
+            app:srcCompat="@drawable/heart" />
+
+        <ImageButton
+            android:id="@+id/ProfileButton"
+            android:layout_width="71dp"
+            android:layout_height="68dp"
+            android:onClick="goProfile"
+            app:srcCompat="@drawable/personicon" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="187dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="cursive"
+        android:text="Instagram"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

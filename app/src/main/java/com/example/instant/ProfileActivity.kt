@@ -32,7 +32,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     fun goLikes(view: View) {
-        val myIntent= Intent(this, CameraActivity::class.java)
+        val myIntent= Intent(this, LikesActivity::class.java)
         startActivity(myIntent)
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // slide back to the main activity
     }

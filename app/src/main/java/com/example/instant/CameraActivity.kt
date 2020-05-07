@@ -17,23 +17,26 @@ class CameraActivity : AppCompatActivity() {
         val myIntent= Intent(this, HomeActivity::class.java)
         startActivity(myIntent)
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // slide back to the main activity
+
     }
 
     fun goSearch(view: View) {
-
+        val myIntent= Intent(this, SearchActivity::class.java)
+        startActivity(myIntent)
+        // this is a slide back
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
     fun goLikes(view: View) {
-        val myIntent= Intent(this, CameraActivity::class.java)
+        val myIntent= Intent(this, LikesActivity::class.java)
         startActivity(myIntent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation
     }
 
     fun goProfile(view: View) {
-        val myIntent= Intent(this, CameraActivity::class.java)
+        val myIntent= Intent(this, ProfileActivity::class.java)
         startActivity(myIntent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation
     }
 
-    fun goCamera(view: View) {}
 }
