@@ -7,6 +7,53 @@
     tools:context=".ProfileActivity">
 
     <LinearLayout
+        android:layout_width="392dp"
+        android:layout_height="85dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_out_button"
+        app:layout_constraintVertical_bias="1.0">
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="71dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="20dp"
+            app:srcCompat="@drawable/homeicon" />
+
+        <ImageButton
+            android:id="@+id/imageButton6"
+            android:layout_width="69dp"
+            android:layout_height="68dp"
+            android:layout_marginBottom="164dp"
+            app:srcCompat="@drawable/search" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="65dp"
+            android:layout_height="68dp"
+            android:layout_marginBottom="16dp"
+            app:srcCompat="@drawable/camera" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="70dp"
+            android:layout_height="68dp"
+            android:layout_marginBottom="16dp"
+            app:srcCompat="@drawable/heart" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="71dp"
+            android:layout_height="68dp"
+            app:srcCompat="@drawable/personicon" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="372dp"
         android:layout_height="161dp"
         android:layout_marginBottom="64dp"
@@ -82,65 +129,13 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="394dp"
-        android:layout_height="65dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageButton
-            android:id="@+id/imageButton9"
-            android:layout_width="111dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="#000000"
-            android:scaleType="fitXY"
-            app:layout_constraintStart_toStartOf="parent"
-             />
-
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="96dp"
-            android:layout_height="63dp"
-            android:layout_marginBottom="16dp"
-            android:text="Search"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <ImageButton
-            android:id="@+id/imageButton12"
-            android:layout_width="117dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:scaleType="fitCenter"
-            />
-
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Likes" />
-
-        <ImageButton
-            android:id="@+id/imageButton13"
-            android:layout_width="91dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
-
-    </LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView2"
         android:layout_width="399dp"
         android:layout_height="291dp"
-        android:layout_marginBottom="108dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.416"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="267dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
