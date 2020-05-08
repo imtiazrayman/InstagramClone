@@ -17,11 +17,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-         //Initialize Firebase Auth
-        auth = FirebaseAuth.getInstance()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //Initialize Firebase Auth
+        auth = FirebaseAuth.getInstance()
+
+        if(auth.currentUser != null){ // this just checks if we are already signed in
+            startActivity(HomeActivity.getLaunchIntent(this))
+            finish()
+        }
 
 
             // what this does is it allows the user to input any email and password they want as long as it matches what is in the firebase console
@@ -37,11 +43,10 @@ class MainActivity : AppCompatActivity() {
             val password = passwordEntered.text.toString()
             if(email.isBlank() || password.isBlank()){ //this checks and sees if the password is null or blank.
                 // this is if the passord is blamk
-                Toast.makeText(this, "Email/password cannot be empty",Toast.LENGTH_SHORT)
+                Toast.makeText(this, "Email/password cannot be empty" ,Toast.LENGTH_SHORT)
                 return@setOnClickListener
             }
             // Fire base authenication check if these fields are empty
-            auth = FirebaseAuth.getInstance() // this line takes in an email or password that has been entered in before using the sign up page
             auth.signInWithEmailAndPassword(email,password).addOnCompleteListener{
                 task ->
                 if(task.isSuccessful){
