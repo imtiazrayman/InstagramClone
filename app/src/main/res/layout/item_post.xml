@@ -45,7 +45,7 @@
             android:layout_height="300dp"
             android:layout_marginTop="4dp"
             android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@drawable/download" />
 
         <TextView
             android:id="@+id/tvDescription"
