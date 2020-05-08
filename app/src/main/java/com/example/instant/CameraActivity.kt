@@ -52,6 +52,7 @@ class CameraActivity : AppCompatActivity() {
                     val imageStream: InputStream? = contentResolver.openInputStream(imageUri!!)
                     val selectedImage = BitmapFactory.decodeStream(imageStream)
                     imageView.setImageBitmap(selectedImage)
+                    db.storeImage("imageUri", "${imageUri}")
 
                     
 
@@ -74,6 +75,7 @@ class CameraActivity : AppCompatActivity() {
         if(requestCode==2)
         {
             imageView.setImageURI(myFile)
+            db.storeImage("imageURI", "${myFile}")
         }
     }
 
