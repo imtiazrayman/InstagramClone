@@ -18,6 +18,8 @@ import java.io.InputStream
 
 class CameraActivity : AppCompatActivity() {
     var myFile:Uri?= null
+    val db = DB()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,10 +47,12 @@ class CameraActivity : AppCompatActivity() {
         if(requestCode == 0){
             if (resultCode === Activity.RESULT_OK) {
                 try {
+
                     val imageUri = data!!.data
                     val imageStream: InputStream? = contentResolver.openInputStream(imageUri!!)
                     val selectedImage = BitmapFactory.decodeStream(imageStream)
                     imageView.setImageBitmap(selectedImage)
+
                     
 
                 } catch (e: FileNotFoundException) {
@@ -61,8 +65,11 @@ class CameraActivity : AppCompatActivity() {
         }
         if (requestCode == 1) {
             //imageView.setImageURI(Uri.fromFile(myFile))
+
             val imageBitmap = data?.extras?.get("data") as Bitmap
+
             imageView.setImageBitmap(imageBitmap)
+            db.storeImage("bitmap", "${imageBitmap}")
         }
         if(requestCode==2)
         {
@@ -81,6 +88,8 @@ class CameraActivity : AppCompatActivity() {
         myFile=Uri.fromFile(photoFile)
         myIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)*/
         startActivityForResult(myIntent,1)
+
+
     }
 
 
@@ -97,6 +106,7 @@ class CameraActivity : AppCompatActivity() {
         if (intent1.resolveActivity(packageManager) != null) {
             startActivityForResult(intent1, REQUEST_TAKE_PHOTO)
         }
+
     }
     companion object {
         private val REQUEST_TAKE_PHOTO = 4
