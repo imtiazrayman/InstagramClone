@@ -6,18 +6,28 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.instant.models.Users
+import com.example.instant.models.Posts
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_home.*
 
+private const val TAG = "PostsActivity"
+const val EXTRA_USERNAME = "EXTRA_USERNAME"
 
 class HomeActivity : AppCompatActivity() {
 
-    private lateinit var firestoreDb : FirebaseFirestore // instance of the database might move this over to db file.
+    //private lateinit var firestoreDb : FirebaseFirestore // instance of the database might move this over to db file
+    private var signedInUsers: Users? = null
+    private lateinit var firestoreDb: FirebaseFirestore
+    private lateinit var posts: MutableList<Posts>
+    private lateinit var adapter: PostsAdapter
 
     val RC_SIGN_IN: Int = 1
     lateinit var mGoogleSignInClient: GoogleSignInClient
@@ -31,7 +41,7 @@ class HomeActivity : AppCompatActivity() {
         configureGoogleSignIn()
 
         // This is code that is a test to see if the images are actually being taken in.
-       /* firestoreDb = FirebaseFirestore.getInstance()
+        /*firestoreDb = FirebaseFirestore.getInstance()
         val postReference = firestoreDb.collection("posts") // call the collection called posts
         postReference.addSnapshotListener{ snapshot, exception ->
             if(exception != null || snapshot == null){
@@ -39,6 +49,55 @@ class HomeActivity : AppCompatActivity() {
             }
             for(document in snapshot.documents){
                 Log.i("HELLO", "Dcoument ${document.id}: ${document.data}")
+            }
+        }*/
+
+
+        // Create the layout file which represents one post - DONE
+        // Create data source - DONE
+
+        /*posts = mutableListOf()
+        // Create the adapter
+        adapter = PostsAdapter(this, posts)
+        // Bind the adapter and layout manager to the RV
+        rvPosts.adapter = adapter
+        rvPosts.layoutManager = LinearLayoutManager(this)
+        firestoreDb = FirebaseFirestore.getInstance()
+
+        firestoreDb.collection("Users")
+            .document(FirebaseAuth.getInstance().currentUser?.uid as String)
+            .get()
+            .addOnSuccessListener { userSnapshot ->
+                signedInUsers = userSnapshot.toObject(Users::class.java)
+                Log.i(TAG, "signed in user: $signedInUsers")
+            }
+            .addOnFailureListener { exception ->
+                Log.i(TAG, "Failure fetching signed in user", exception)
+            }
+
+
+        var postsReference = firestoreDb
+            .collection("posts")
+            .limit(20)
+            .orderBy("creation_time_ms", Query.Direction.DESCENDING)
+
+        val username = intent.getStringExtra(EXTRA_USERNAME)
+        if (username != null) {
+            supportActionBar?.title = username
+            postsReference = postsReference.whereEqualTo("Users.username", username)
+        }
+
+        postsReference.addSnapshotListener { snapshot, exception ->
+            if (exception != null || snapshot == null) {
+                Log.e(TAG, "Exception when querying posts", exception)
+                return@addSnapshotListener
+            }
+            val postList = snapshot.toObjects(Posts::class.java)
+            posts.clear()
+            posts.addAll(postList)
+            adapter.notifyDataSetChanged()
+            for (post in postList) {
+
             }
         }*/
 

@@ -49,6 +49,8 @@ class CameraActivity : AppCompatActivity() {
                     val imageStream: InputStream? = contentResolver.openInputStream(imageUri!!)
                     val selectedImage = BitmapFactory.decodeStream(imageStream)
                     imageView.setImageBitmap(selectedImage)
+                    
+
                 } catch (e: FileNotFoundException) {
                     e.printStackTrace()
                    // Toast.makeText(this@PostImage, "Something went wrong", Toast.LENGTH_LONG).show()

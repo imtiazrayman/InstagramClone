@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             now an intersting issue is we can probably try to create a new user an password probably in the sign in where the user can either manually enter email and pass
             and also have the option to sign into google. But for now I havent touched any code in sign in but the code works on two levels as far as authentication.
              */
-            btnLogin.setOnClickListener {
+           /* btnLogin.setOnClickListener {
             val email = usernameEntered.text.toString()
             val password = passwordEntered.text.toString()
             if(email.isBlank() || password.isBlank()){ //this checks and sees if the password is null or blank.
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "Authentication Failed" , Toast.LENGTH_SHORT).show()
                 }
             }
-        }
+        }*/
 
     }
 
