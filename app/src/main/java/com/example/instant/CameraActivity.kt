@@ -1,24 +1,20 @@
 package com.example.instant
 
+import android.app.Activity
 import android.content.Intent
-
-import android.content.Intent.ACTION_DIAL
-import android.content.Intent.ACTION_VIEW
-
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
-import android.widget.ImageView
-import androidx.core.content.FileProvider
-import androidx.core.net.toFile
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_camera.*
-import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
+
+import java.io.FileNotFoundException
+import java.io.InputStream
+
 
 class CameraActivity : AppCompatActivity() {
     var myFile:Uri?= null
@@ -46,6 +42,21 @@ class CameraActivity : AppCompatActivity() {
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == 0){
+            if (resultCode === Activity.RESULT_OK) {
+                try {
+                    val imageUri = data!!.data
+                    val imageStream: InputStream? = contentResolver.openInputStream(imageUri!!)
+                    val selectedImage = BitmapFactory.decodeStream(imageStream)
+                    imageView.setImageBitmap(selectedImage)
+                } catch (e: FileNotFoundException) {
+                    e.printStackTrace()
+                   // Toast.makeText(this@PostImage, "Something went wrong", Toast.LENGTH_LONG).show()
+                }
+            } else {
+               // Toast.makeText(this@PostImage, "You haven't picked Image", Toast.LENGTH_LONG).show()
+            }
+        }
         if (requestCode == 1) {
             //imageView.setImageURI(Uri.fromFile(myFile))
             val imageBitmap = data?.extras?.get("data") as Bitmap
@@ -69,6 +80,28 @@ class CameraActivity : AppCompatActivity() {
         myIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)*/
         startActivityForResult(myIntent,1)
     }
+
+
+
+    fun goGallery() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "image/*"
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivityForResult(intent, REQUEST_SELECT_IMAGE_IN_ALBUM)
+        }
+    }
+    fun takePhoto() {
+        val intent1 = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (intent1.resolveActivity(packageManager) != null) {
+            startActivityForResult(intent1, REQUEST_TAKE_PHOTO)
+        }
+    }
+    companion object {
+        private val REQUEST_TAKE_PHOTO = 4
+        private val REQUEST_SELECT_IMAGE_IN_ALBUM = 0
+    }
+
+
 
 
 
@@ -103,5 +136,8 @@ class CameraActivity : AppCompatActivity() {
         startActivity(myIntent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation
     }
+
+
+
 
 }
