@@ -41,7 +41,7 @@ class HomeActivity : AppCompatActivity() {
         configureGoogleSignIn()
 
         // This is code that is a test to see if the images are actually being taken in.
-        /*firestoreDb = FirebaseFirestore.getInstance()
+       /* firestoreDb = FirebaseFirestore.getInstance()
         val postReference = firestoreDb.collection("posts") // call the collection called posts
         postReference.addSnapshotListener{ snapshot, exception ->
             if(exception != null || snapshot == null){
@@ -50,13 +50,12 @@ class HomeActivity : AppCompatActivity() {
             for(document in snapshot.documents){
                 Log.i("HELLO", "Dcoument ${document.id}: ${document.data}")
             }
-        }*/
-
+        }
 
         // Create the layout file which represents one post - DONE
         // Create data source - DONE
 
-        /*posts = mutableListOf()
+        posts = mutableListOf()
         // Create the adapter
         adapter = PostsAdapter(this, posts)
         // Bind the adapter and layout manager to the RV
@@ -74,7 +73,6 @@ class HomeActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.i(TAG, "Failure fetching signed in user", exception)
             }
-
 
         var postsReference = firestoreDb
             .collection("posts")
@@ -100,15 +98,10 @@ class HomeActivity : AppCompatActivity() {
 
             }
         }*/
-
-
-
-
-
-
-
-
     }
+
+
+
     private fun configureGoogleSignIn() {
         mGoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))

@@ -49,11 +49,11 @@ class CameraActivity : AppCompatActivity() {
                     val imageStream: InputStream? = contentResolver.openInputStream(imageUri!!)
                     val selectedImage = BitmapFactory.decodeStream(imageStream)
                     imageView.setImageBitmap(selectedImage)
-                    
+
 
                 } catch (e: FileNotFoundException) {
                     e.printStackTrace()
-                   // Toast.makeText(this@PostImage, "Something went wrong", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@CameraActivity, "Something went wrong", Toast.LENGTH_LONG).show()
                 }
             } else {
                // Toast.makeText(this@PostImage, "You haven't picked Image", Toast.LENGTH_LONG).show()
@@ -62,7 +62,9 @@ class CameraActivity : AppCompatActivity() {
         if (requestCode == 1) {
             //imageView.setImageURI(Uri.fromFile(myFile))
             val imageBitmap = data?.extras?.get("data") as Bitmap
+
             imageView.setImageBitmap(imageBitmap)
+            //Uri.imageBitmap
         }
         if(requestCode==2)
         {
