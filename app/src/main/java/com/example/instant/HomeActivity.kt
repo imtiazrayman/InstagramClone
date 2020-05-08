@@ -3,6 +3,7 @@ package com.example.instant
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -10,10 +11,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_home.*
 
 
 class HomeActivity : AppCompatActivity() {
+
+    private lateinit var firestoreDb : FirebaseFirestore // instance of the database might move this over to db file.
 
     val RC_SIGN_IN: Int = 1
     lateinit var mGoogleSignInClient: GoogleSignInClient
@@ -25,6 +29,26 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         setupUI();
         configureGoogleSignIn()
+
+        // This is code that is a test to see if the images are actually being taken in.
+       /* firestoreDb = FirebaseFirestore.getInstance()
+        val postReference = firestoreDb.collection("posts") // call the collection called posts
+        postReference.addSnapshotListener{ snapshot, exception ->
+            if(exception != null || snapshot == null){
+                return@addSnapshotListener
+            }
+            for(document in snapshot.documents){
+                Log.i("HELLO", "Dcoument ${document.id}: ${document.data}")
+            }
+        }*/
+
+
+
+
+
+
+
+
     }
     private fun configureGoogleSignIn() {
         mGoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -56,11 +80,8 @@ class HomeActivity : AppCompatActivity() {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         }
     }
-    /*fun goHome(view: View) {
-        val myIntent= Intent(this, HomeActivity::class.java)
-        startActivity(myIntent)
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // slide back to the main activity
-    }*/
+
+
 
     fun goSearch(view: View) {
         val myIntent= Intent(this, SearchActivity::class.java)

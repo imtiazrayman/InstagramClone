@@ -2,10 +2,13 @@ package com.example.instant
 
 import android.view.Gravity
 import android.widget.Toast
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class DB {
+
+
 
     // Access a Cloud Firestore instance from your Activity
     val db = Firebase.firestore
