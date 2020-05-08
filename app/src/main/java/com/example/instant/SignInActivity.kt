@@ -35,15 +35,28 @@ class SignInActivity : AppCompatActivity() {
             if (it.isSuccessful) {
                 startActivity(HomeActivity.getLaunchIntent(this))
             } else {
-                Toast.makeText(this, "Google sign in failed:(", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Google sign in failed in firebase authentication:(", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "${credential}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "${acct}", Toast.LENGTH_LONG).show()
             }
         }
     }
     override fun onStart() {
         super.onStart()
+        // Check for existing Google Sign In account, if the user is already signed in
+// the GoogleSignInAccount will be non-null.
+
+        // Check for existing Google Sign In account, if the user is already signed in
+// the GoogleSignInAccount will be non-null.
+        val account = GoogleSignIn.getLastSignedInAccount(this)
+
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
             startActivity(HomeActivity.getLaunchIntent(this))
+            finish()
+        }
+        else if (account != null) {
+            firebaseAuthWithGoogle(account);
             finish()
         }
     }
@@ -66,14 +79,17 @@ class SignInActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
+            var account: GoogleSignInAccount? = null
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                val account = task.getResult(ApiException::class.java)
+                 account = task.getResult(ApiException::class.java)
                 if (account != null) {
                     firebaseAuthWithGoogle(account)
                 }
             } catch (e: ApiException) {
-                Toast.makeText(this, "Google sign in failed:(", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Google sign in failed in google section :(", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "${account}:(", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "${task}:(", Toast.LENGTH_LONG).show()
             }
         }
     }
