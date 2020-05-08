@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                tools:text="rahul" />
+                tools:text="Username" />
         </LinearLayout>
 
         <TextView
