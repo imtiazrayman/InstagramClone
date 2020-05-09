@@ -1,8 +1,10 @@
 package com.example.instant
 
 import android.util.Log
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -61,14 +63,32 @@ class DB {
     }
     //returns a collection reference to the images
     //still need to work on this
-    fun retrieveAllImages(): CollectionReference {
-        val images = db.collection("images");
+    fun retrieveAllImages(): Task<QuerySnapshot> {
+        var images = db.collection("images")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
         return images
     }
     //returns a collection reference to the images
     //still need to work on this
-    fun retrieveAllVideos(): CollectionReference {
-        val videos = db.collection("videos");
+    fun retrieveAllVideos(): Task<QuerySnapshot> {
+        var videos = db.collection("videos")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
         return videos
     }
 
