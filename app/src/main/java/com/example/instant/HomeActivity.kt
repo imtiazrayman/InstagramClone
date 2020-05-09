@@ -31,6 +31,7 @@ class HomeActivity : AppCompatActivity() {
     val RC_SIGN_IN: Int = 1
     lateinit var mGoogleSignInClient: GoogleSignInClient
     lateinit var mGoogleSignInOptions: GoogleSignInOptions
+    val db = DB()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -38,6 +39,10 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         setupUI();
         configureGoogleSignIn()
+
+        db.retrieveAllImages()
+
+
 
         // This is code that is a test to see if the images are actually being taken in.
         /*firestoreDb = FirebaseFirestore.getInstance()

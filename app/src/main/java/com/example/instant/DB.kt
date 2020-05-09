@@ -92,5 +92,8 @@ class DB {
         return videos
     }
 
+    fun retrieveUserInfo(): String? {
+        return FirebaseAuth.getInstance().currentUser?.email
+    }
 
 }
