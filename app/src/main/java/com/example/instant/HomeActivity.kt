@@ -23,7 +23,6 @@ const val EXTRA_USERNAME = "EXTRA_USERNAME"
 
 class HomeActivity : AppCompatActivity() {
 
-    //private lateinit var firestoreDb : FirebaseFirestore // instance of the database might move this over to db file
     private var signedInUsers: Users? = null
     private lateinit var firestoreDb: FirebaseFirestore
     private lateinit var posts: MutableList<Posts>
@@ -109,6 +108,7 @@ class HomeActivity : AppCompatActivity() {
 
 
     }
+    //sets the google sign in options to default with our web client id (api key)
     private fun configureGoogleSignIn() {
         mGoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -116,18 +116,21 @@ class HomeActivity : AppCompatActivity() {
             .build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, mGoogleSignInOptions)
     }
+    //sets an on click listener to the google sign out button
     private fun setupUI() {
         sign_out_button.setOnClickListener {
             signOut()
         }
     }
-
+    //sign the user out of the firebase account and google account. Also starts the Sign in Activity
     private fun signOut() {
-        startActivity(SignInActivity.getLaunchIntent(this))
-
         FirebaseAuth.getInstance().signOut();
         googleSignOut()
+        startActivity(SignInActivity.getLaunchIntent(this))
+
+
     }
+    //logs a user out of google
     private fun googleSignOut() {
         mGoogleSignInClient.signOut()
             .addOnCompleteListener(this, OnCompleteListener<Void?> {
@@ -141,26 +144,26 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
-
+//launches the search activity with an animation
     fun goSearch(view: View) {
         val myIntent= Intent(this, SearchActivity::class.java)
         startActivity(myIntent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation
     }
 
-
+//launches the camera activity with an animation
     fun goCamera(view: View) {
         val myIntent= Intent(this, CameraActivity::class.java)
         startActivity(myIntent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation
     }
-
+//launches the likes activity with an animation
     fun goLikes(view: View) {
         val myIntent= Intent(this, LikesActivity::class.java)
         startActivity(myIntent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation
     }
-
+//launches the profile activity with an animation
     fun goProfile(view: View) {
         val myIntent= Intent(this, ProfileActivity::class.java)
         startActivity(myIntent)

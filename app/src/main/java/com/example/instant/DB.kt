@@ -1,10 +1,8 @@
 package com.example.instant
 
 import android.util.Log
-import android.view.Gravity
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -14,10 +12,15 @@ class DB {
 
     // Access a Cloud Firestore instance from your Activity
     val db = Firebase.firestore
-    //store an image with a given uRL
+    //store an image with a given uRL and type of encoding (bitmap or imageurl) and the user who posted it
+    //params: type as a string and imageURL as a string
+    //stores in firebase db as {images: {imageID : {type, url, user}}}
     fun storeImage(type: String, imageURL: String){
+        val user  = retrieveCurrentUser()
         val image = hashMapOf(
-            "${type}" to "${imageURL}"
+            "type" to "${type}",
+            "url" to "${imageURL}",
+            "user" to "${user}"
         )
 
         // Add a new document with a generated ID
@@ -33,25 +36,40 @@ class DB {
                 Log.e("testing", "am I in the failure reference");
             }
     }
-    fun storeVideo(videoURL: String)
+    //store a video in firebase dB
+    //params: type as a string and the video url as a string
+    //stores in firebase db as {videos: {videoID : {type, url, user}}}
+
+    fun storeVideo(type: String, videoURL: String)
     {
+        val user  = retrieveCurrentUser()
+        val video = hashMapOf(
+            "type" to "${type}",
+            "url" to "${videoURL}",
+            "user" to "${user}"
+        )
         db.collection("videos")
-            .add(videoURL)
+            .add(video)
             .addOnSuccessListener { documentReference ->
             }
             .addOnFailureListener { e ->
             }
     }
-    fun retrieveCurrentUser(){
-        val user = FirebaseAuth.getInstance().currentUser
+    //retrieves the current user from firebase
+    fun retrieveCurrentUser(): String? {
+        return FirebaseAuth.getInstance().currentUser?.displayName
     }
-
-    fun retrieveAllImages()
-    {
+    //returns a collection reference to the images
+    //still need to work on this
+    fun retrieveAllImages(): CollectionReference {
         val images = db.collection("images");
+        return images
     }
-    fun retrieveAllVideos(){
+    //returns a collection reference to the images
+    //still need to work on this
+    fun retrieveAllVideos(): CollectionReference {
         val videos = db.collection("videos");
+        return videos
     }
 
 
