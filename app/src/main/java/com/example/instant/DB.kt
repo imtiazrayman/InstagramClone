@@ -92,7 +92,8 @@ class DB {
         return videos
     }
 
-    fun retrieveUserInfo(): String? {
+    // this is a small retriever to display the email for the user in the profile activity.
+    fun retrieveUserEmail(): String? {
         return FirebaseAuth.getInstance().currentUser?.email
     }
 

@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,7 @@ import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
+private const val PICK_PHOTO_CODE = 1
 
 class CameraActivity : AppCompatActivity() {
     var myFile:Uri?=null
@@ -46,10 +48,14 @@ class CameraActivity : AppCompatActivity() {
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1) {
-            //imageView.setImageURI(Uri.fromFile(myFile))
-            val imageBitmap = data?.extras?.get("data") as Bitmap
-            imageView.setImageBitmap(imageBitmap)
+
+        if (requestCode == PICK_PHOTO_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                myFile = data?.data
+                imageView.setImageURI(myFile)
+            } else {
+                Toast.makeText(this, "Image picker action canceled", Toast.LENGTH_SHORT).show()
+            }
         }
         if(requestCode==2)
         {
@@ -57,12 +63,6 @@ class CameraActivity : AppCompatActivity() {
             db.storeImage("Uri", myFile.toString())
         }
 
-    }
-
-    fun ThumbnailPictureIntent(view: View) {
-        //Thumbnail Way
-        val myIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(myIntent, 1)
     }
 
     fun FullSizedPictureIntent(view: View) {
@@ -157,6 +157,11 @@ class CameraActivity : AppCompatActivity() {
 
 
     fun goGallery() {
+            val imagePickerIntent = Intent(Intent.ACTION_GET_CONTENT)
+            imagePickerIntent.type = "image/*"
+            if (imagePickerIntent.resolveActivity(packageManager) != null) {
+                startActivityForResult(imagePickerIntent, PICK_PHOTO_CODE)
+            }
     }
 
 
