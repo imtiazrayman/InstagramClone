@@ -18,12 +18,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_home.*
 
-private const val TAG = "PostsActivity"
+const val TAG = "PostsActivity"
 const val EXTRA_USERNAME = "EXTRA_USERNAME"
 
 class HomeActivity : AppCompatActivity() {
 
-    //private lateinit var firestoreDb : FirebaseFirestore // instance of the database might move this over to db file
     private var signedInUsers: Users? = null
     private lateinit var firestoreDb: FirebaseFirestore
     private lateinit var posts: MutableList<Posts>
@@ -32,7 +31,6 @@ class HomeActivity : AppCompatActivity() {
     val RC_SIGN_IN: Int = 1
     lateinit var mGoogleSignInClient: GoogleSignInClient
     lateinit var mGoogleSignInOptions: GoogleSignInOptions
-    val db = DB()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -42,7 +40,7 @@ class HomeActivity : AppCompatActivity() {
         configureGoogleSignIn()
 
         // This is code that is a test to see if the images are actually being taken in.
-       /* firestoreDb = FirebaseFirestore.getInstance()
+        /*firestoreDb = FirebaseFirestore.getInstance()
         val postReference = firestoreDb.collection("posts") // call the collection called posts
         postReference.addSnapshotListener{ snapshot, exception ->
             if(exception != null || snapshot == null){
@@ -51,12 +49,13 @@ class HomeActivity : AppCompatActivity() {
             for(document in snapshot.documents){
                 Log.i("HELLO", "Dcoument ${document.id}: ${document.data}")
             }
-        }
+        }*/
+
 
         // Create the layout file which represents one post - DONE
         // Create data source - DONE
 
-        posts = mutableListOf()
+        /*posts = mutableListOf()
         // Create the adapter
         adapter = PostsAdapter(this, posts)
         // Bind the adapter and layout manager to the RV
@@ -74,6 +73,7 @@ class HomeActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.i(TAG, "Failure fetching signed in user", exception)
             }
+
 
         var postsReference = firestoreDb
             .collection("posts")
@@ -99,10 +99,16 @@ class HomeActivity : AppCompatActivity() {
 
             }
         }*/
+
+
+
+
+
+
+
+
     }
-
-
-
+    //sets the google sign in options to default with our web client id (api key)
     private fun configureGoogleSignIn() {
         mGoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -110,18 +116,21 @@ class HomeActivity : AppCompatActivity() {
             .build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, mGoogleSignInOptions)
     }
+    //sets an on click listener to the google sign out button
     private fun setupUI() {
         sign_out_button.setOnClickListener {
             signOut()
         }
     }
-
+    //sign the user out of the firebase account and google account. Also starts the Sign in Activity
     private fun signOut() {
-        startActivity(SignInActivity.getLaunchIntent(this))
-
         FirebaseAuth.getInstance().signOut();
         googleSignOut()
+        startActivity(SignInActivity.getLaunchIntent(this))
+
+
     }
+    //logs a user out of google
     private fun googleSignOut() {
         mGoogleSignInClient.signOut()
             .addOnCompleteListener(this, OnCompleteListener<Void?> {
@@ -135,26 +144,26 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
-
+//launches the search activity with an animation
     fun goSearch(view: View) {
         val myIntent= Intent(this, SearchActivity::class.java)
         startActivity(myIntent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation
     }
 
-
+//launches the camera activity with an animation
     fun goCamera(view: View) {
         val myIntent= Intent(this, CameraActivity::class.java)
         startActivity(myIntent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation
     }
-
+//launches the likes activity with an animation
     fun goLikes(view: View) {
         val myIntent= Intent(this, LikesActivity::class.java)
         startActivity(myIntent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation
     }
-
+//launches the profile activity with an animation
     fun goProfile(view: View) {
         val myIntent= Intent(this, ProfileActivity::class.java)
         startActivity(myIntent)

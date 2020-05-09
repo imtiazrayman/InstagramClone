@@ -24,42 +24,52 @@ class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
+        //gets an instance of firebase authentication object
         firebaseAuth = FirebaseAuth.getInstance()
         setupUI()
         configureGoogleSignIn()
 
     }
+    //authenticates a google account with firebase
+    //params : account with type GoogleSignInAccount
+
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
+        //grabs a google credential
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
+        //converts google credential into a firebase credential
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
+                //launches home activity
                 startActivity(HomeActivity.getLaunchIntent(this))
             } else {
+                //failure toasts and tests
                 Toast.makeText(this, "Google sign in failed in firebase authentication:(", Toast.LENGTH_LONG).show()
                 Toast.makeText(this, "${credential}", Toast.LENGTH_LONG).show()
                 Toast.makeText(this, "${acct}", Toast.LENGTH_LONG).show()
             }
         }
     }
+
     override fun onStart() {
         super.onStart()
-        // Check for existing Google Sign In account, if the user is already signed in
-// the GoogleSignInAccount will be non-null.
 
-        // Check for existing Google Sign In account, if the user is already signed in
-// the GoogleSignInAccount will be non-null.
+
         val account = GoogleSignIn.getLastSignedInAccount(this)
 
         val user = FirebaseAuth.getInstance().currentUser
+        //checks for existing firebase account. null if not logged in
         if (user != null) {
             startActivity(HomeActivity.getLaunchIntent(this))
             finish()
         }
+        // Check for existing Google Sign In account, if the user is already signed in
+// the GoogleSignInAccount will be non-null.
         else if (account != null) {
             firebaseAuthWithGoogle(account);
             finish()
         }
     }
+    //configures google sign in options with default and our web client id (api key)
     private fun configureGoogleSignIn() {
         mGoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -67,18 +77,22 @@ class SignInActivity : AppCompatActivity() {
             .build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, mGoogleSignInOptions)
     }
+    //sets an onclick listener for our google sign in button
     private fun setupUI() {
         google_button.setOnClickListener {
             signIn()
         }
     }
+    //starts the sign in activity
     private fun signIn() {
         val signInIntent: Intent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
+    //google sign in and authentication occur here
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
+
             var account: GoogleSignInAccount? = null
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
