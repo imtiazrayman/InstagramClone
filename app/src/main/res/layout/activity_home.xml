@@ -24,7 +24,7 @@
             android:layout_width="71dp"
             android:layout_height="68dp"
             android:layout_marginStart="20dp"
-            android:onClick="goHome"
+
             app:srcCompat="@drawable/homeicon"
             tools:ignore="OnClick" />
 
@@ -62,14 +62,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPosts"
-        android:layout_width="347dp"
-        android:layout_height="482dp"
+        android:layout_width="338dp"
+        android:layout_height="472dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.685"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/item_post" />
 
     <TextView
@@ -107,7 +107,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="This is the feed"
-        app:layout_constraintBottom_toTopOf="@+id/rvPosts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />

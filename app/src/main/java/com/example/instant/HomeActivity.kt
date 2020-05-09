@@ -32,6 +32,7 @@ class HomeActivity : AppCompatActivity() {
     val RC_SIGN_IN: Int = 1
     lateinit var mGoogleSignInClient: GoogleSignInClient
     lateinit var mGoogleSignInOptions: GoogleSignInOptions
+    val db = DB()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
