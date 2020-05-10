@@ -61,6 +61,9 @@ class CameraActivity : AppCompatActivity() {
         {
             imageView.setImageURI(myFile)
             db.storeImage("Uri", myFile.toString())
+            var collection = db.retrieveAllImages()
+            Toast.makeText(this, "${collection["QHGLIisMwYpKAEtKKZjy"]}", Toast.LENGTH_LONG).show()
+
         }
 
     }

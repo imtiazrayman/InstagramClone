@@ -63,22 +63,26 @@ class DB {
     }
     //returns a collection reference to the images
     //still need to work on this
-    fun retrieveAllImages(): Task<QuerySnapshot> {
+    fun retrieveAllImages(): ArrayList<Any> {
+        val arrayList = ArrayList<Any>()
         var images = db.collection("images")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
+                    arrayList.add(document.data)
                     Log.d(TAG, "${document.id} => ${document.data}")
                 }
             }
             .addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting documents: ", exception)
             }
-        return images
+
+        return arrayList
     }
     //returns a collection reference to the images
     //still need to work on this
     fun retrieveAllVideos(): Task<QuerySnapshot> {
+
         var videos = db.collection("videos")
             .get()
             .addOnSuccessListener { result ->
@@ -91,6 +95,7 @@ class DB {
             }
         return videos
     }
+
 
     // this is a small retriever to display the email for the user in the profile activity.
     fun retrieveUserEmail(): String? {
