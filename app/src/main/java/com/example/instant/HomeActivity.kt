@@ -41,7 +41,7 @@ class HomeActivity : AppCompatActivity() {
         configureGoogleSignIn()
 
         db.retrieveAllImages()
-        
+
 
 
 
