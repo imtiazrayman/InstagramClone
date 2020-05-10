@@ -1,6 +1,8 @@
 package com.example.instant
 
+import android.content.ContentValues.TAG
 import android.util.Log
+import com.example.instant.models.Posts
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
@@ -17,13 +19,16 @@ class DB {
     //store an image with a given uRL and type of encoding (bitmap or imageurl) and the user who posted it
     //params: type as a string and imageURL as a string
     //stores in firebase db as {images: {imageID : {type, url, user}}}
-    fun storeImage(type: String, imageURL: String){
+    fun storeImage(type: String, imageURL: String , time: String){
         val user  = retrieveCurrentUser()
+        val capturetime = time
         val image = hashMapOf(
             "type" to "${type}",
             "url" to "${imageURL}",
-            "user" to "${user}"
+            "user" to "${user}",
+            "time" to "${capturetime}" // this is added so we can arrange the posts based upon the time sent.
         )
+        Posts(imageURL, user.toString(), capturetime)
 
         // Add a new document with a generated ID
         Log.e("testing", "am I in the db");
@@ -96,5 +101,8 @@ class DB {
     fun retrieveUserEmail(): String? {
         return FirebaseAuth.getInstance().currentUser?.email
     }
+
+
+
 
 }

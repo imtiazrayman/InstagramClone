@@ -1,6 +1,5 @@
 package com.example.instant
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,8 +9,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import com.example.instant.models.Posts
+import com.example.instant.models.Users
 import kotlinx.android.synthetic.main.activity_camera.*
-
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -48,7 +48,10 @@ class CameraActivity : AppCompatActivity() {
         if (requestCode == 1) {
             myFile = data?.data
             imageView.setImageURI(data?.data)
-            db.storeImage("Uri", myFile.toString())
+            var timecaptured = getDate(System.currentTimeMillis())
+            db.storeImage("Uri", myFile.toString(), timecaptured.toString())
+            Posts(myFile.toString(), db.retrieveCurrentUser().toString(), timecaptured.toString())
+            Toast.makeText(this, "Photo Uploaded from Gallery", Toast.LENGTH_SHORT).show()
         }
              else {
             Toast.makeText(this, "Image picker action canceled", Toast.LENGTH_SHORT).show()
@@ -56,10 +59,25 @@ class CameraActivity : AppCompatActivity() {
         if(requestCode==2)
         {
             imageView.setImageURI(myFile)
-            db.storeImage("Uri", myFile.toString())
+            var timecaptured = getDate(System.currentTimeMillis())
+            db.storeImage("Uri", myFile.toString(), timecaptured.toString())
+            Posts(myFile.toString(), db.retrieveCurrentUser().toString(), timecaptured.toString())
+            Toast.makeText(this, "Photo Uploaded from Capture", Toast.LENGTH_SHORT).show()
         }
 
     }
+
+    fun getDate(milliSeconds: Long): String? { // Create a DateFormatter object for displaying date in specified format.
+        val formatter = SimpleDateFormat("MM/dd/yyyy hh:mm")
+        // Create a calendar object that will convert the date and time value in milliseconds to date.
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = milliSeconds
+        return formatter.format(calendar.time)
+    }
+
+
+
+
 
     fun FullSizedPictureIntent(view: View) {
 
@@ -149,18 +167,6 @@ class CameraActivity : AppCompatActivity() {
 
 
     }*/
-
-
-
-
-
-
-
-
-
-
-
-
 
     // these are the Navigational Methods
     fun goHome(view: View) {

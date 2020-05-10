@@ -56,6 +56,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.4.0'
     implementation 'com.google.firebase:firebase-auth:19.3.1'
 
+    //This is a package which allows for the recylcerview to move
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
 
     //play service auth
     implementation 'com.google.android.gms:play-services-auth:18.0.0'

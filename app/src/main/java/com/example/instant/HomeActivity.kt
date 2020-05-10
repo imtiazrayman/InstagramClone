@@ -17,9 +17,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_main.*
 
-const val TAG = "PostsActivity"
-const val EXTRA_USERNAME = "EXTRA_USERNAME"
 
 class HomeActivity : AppCompatActivity() {
 
@@ -27,6 +26,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var firestoreDb: FirebaseFirestore
     private lateinit var posts: MutableList<Posts>
     private lateinit var adapter: PostsAdapter
+
 
     val RC_SIGN_IN: Int = 1
     lateinit var mGoogleSignInClient: GoogleSignInClient
@@ -40,9 +40,7 @@ class HomeActivity : AppCompatActivity() {
         setupUI();
         configureGoogleSignIn()
 
-        db.retrieveAllImages()
-
-
+        //db.retrieveAllImages()
 
 
         // This is code that is a test to see if the images are actually being taken in.
@@ -56,62 +54,27 @@ class HomeActivity : AppCompatActivity() {
                 Log.i("HELLO", "Dcoument ${document.id}: ${document.data}")
             }
         }*/
-
-
-        // Create the layout file which represents one post - DONE
-        // Create data source - DONE
-
-        /*posts = mutableListOf()
+        //textView5.text = db.retrieveAnImage()
+        firestoreDb = FirebaseFirestore.getInstance()
+        posts = mutableListOf()
         // Create the adapter
         adapter = PostsAdapter(this, posts)
         // Bind the adapter and layout manager to the RV
         rvPosts.adapter = adapter
         rvPosts.layoutManager = LinearLayoutManager(this)
-        firestoreDb = FirebaseFirestore.getInstance()
-
-        firestoreDb.collection("Users")
-            .document(FirebaseAuth.getInstance().currentUser?.uid as String)
-            .get()
-            .addOnSuccessListener { userSnapshot ->
-                signedInUsers = userSnapshot.toObject(Users::class.java)
-                Log.i(TAG, "signed in user: $signedInUsers")
-            }
-            .addOnFailureListener { exception ->
-                Log.i(TAG, "Failure fetching signed in user", exception)
-            }
-
 
         var postsReference = firestoreDb
-            .collection("posts")
+            .collection("images")
             .limit(20)
-            .orderBy("creation_time_ms", Query.Direction.DESCENDING)
-
-        val username = intent.getStringExtra(EXTRA_USERNAME)
-        if (username != null) {
-            supportActionBar?.title = username
-            postsReference = postsReference.whereEqualTo("Users.username", username)
-        }
-
-        postsReference.addSnapshotListener { snapshot, exception ->
-            if (exception != null || snapshot == null) {
-                Log.e(TAG, "Exception when querying posts", exception)
-                return@addSnapshotListener
-            }
-            val postList = snapshot.toObjects(Posts::class.java)
-            posts.clear()
-            posts.addAll(postList)
-            adapter.notifyDataSetChanged()
-            for (post in postList) {
-
-            }
-        }*/
 
 
 
 
+    }
 
 
-
+    override fun onStart() {
+        super.onStart()
 
     }
     //sets the google sign in options to default with our web client id (api key)
