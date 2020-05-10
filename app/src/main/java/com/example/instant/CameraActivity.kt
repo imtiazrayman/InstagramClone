@@ -2,24 +2,20 @@ package com.example.instant
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import kotlinx.android.synthetic.main.activity_camera.*
-import java.io.File
 
-import java.io.FileNotFoundException
-import java.io.InputStream
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 private const val PICK_PHOTO_CODE = 1
 
@@ -49,13 +45,13 @@ class CameraActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == PICK_PHOTO_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                myFile = data?.data
-                imageView.setImageURI(myFile)
-            } else {
-                Toast.makeText(this, "Image picker action canceled", Toast.LENGTH_SHORT).show()
-            }
+        if (requestCode == 1) {
+            myFile = data?.data
+            imageView.setImageURI(data?.data)
+            db.storeImage("Uri", myFile.toString())
+        }
+             else {
+            Toast.makeText(this, "Image picker action canceled", Toast.LENGTH_SHORT).show()
         }
         if(requestCode==2)
         {
@@ -159,13 +155,7 @@ class CameraActivity : AppCompatActivity() {
 
 
 
-    fun goGallery() {
-            val imagePickerIntent = Intent(Intent.ACTION_GET_CONTENT)
-            imagePickerIntent.type = "image/*"
-            if (imagePickerIntent.resolveActivity(packageManager) != null) {
-                startActivityForResult(imagePickerIntent, PICK_PHOTO_CODE)
-            }
-    }
+
 
 
 
@@ -204,7 +194,11 @@ class CameraActivity : AppCompatActivity() {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // slide out to next activity animation
     }
 
-
+    fun goGallery(view: View) {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, 1)
+    }
 
 
 }
