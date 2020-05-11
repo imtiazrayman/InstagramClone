@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.newSingleThreadContext
+
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
 
@@ -18,7 +20,8 @@ class Feed : AppCompatActivity() {
         setContentView(R.layout.activity_feed)
 
         scope.launch { arrayList = retrieveImages() as ArrayList<Any> }
-        println(arrayList[0])
+       // println(arrayList[0])
+
 
 
 

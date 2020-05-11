@@ -2,6 +2,7 @@ package com.example.instant
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -17,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.item_post.view.*
 import kotlinx.coroutines.*
 
 
@@ -83,7 +85,9 @@ class HomeActivity : AppCompatActivity() {
         println(hash["url"])
         imagepath = hash["url"].toString()
         //Log.d("checkurl" , "$imagepath")
-        textView5.text = hash["url"]
+        imageView3.setImageURI(Uri.parse(hash["url"].toString()))
+       //textView5.text = hash["url"].toString()
+
 
 
     }
