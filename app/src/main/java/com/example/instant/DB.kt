@@ -1,12 +1,15 @@
 package com.example.instant
 
 import android.util.Log
+import android.widget.Toast
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
 
 class DB {
 
@@ -61,23 +64,50 @@ class DB {
     fun retrieveCurrentUser(): String? {
         return FirebaseAuth.getInstance().currentUser?.displayName
     }
+    suspend fun retrieveAllImages(): ArrayList<Any> {
+        val snapshot = db.collection("images").get().await()
+        var arrayList = ArrayList<Any>()
+        for(document in snapshot){
+            val image = hashMapOf(
+                "time" to "${document.data["time"]?.let { arrayList.add(it) }}",
+                "type" to "${document.data["type"]?.let { arrayList.add(it) }}",
+                "url" to "${document.data["url"]?.let { arrayList.add(it) }}",
+                "user" to "${document.data["user"]?.let { arrayList.add(it) }}"
+            )
+            arrayList.add("end")
+
+
+
+
+        }
+        return arrayList
+    }
     //returns a collection reference to the images
     //still need to work on this
-    fun retrieveAllImages(): ArrayList<Any> {
+    fun retrieveAllImages2(): ArrayList<Any> {
         val arrayList = ArrayList<Any>()
         var images = db.collection("images")
             .get()
+
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    arrayList.add(document.data)
-                    Log.d(TAG, "${document.id} => ${document.data}")
+
+
+
+                    System.out.println("document value...${document.id}")
+                    arrayList.add("${document.id}")
+                    System.out.println("arraylist value...${arrayList}")
+
                 }
+
             }
             .addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting documents: ", exception)
             }
 
+        System.out.println("here we are " + arrayList)
         return arrayList
+
     }
     //returns a collection reference to the images
     //still need to work on this

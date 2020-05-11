@@ -10,6 +10,7 @@ class LikesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_likes)
+
     }
     fun goHome(view: View) {
         val myIntent= Intent(this, HomeActivity::class.java)

@@ -49,16 +49,17 @@ class CameraActivity : AppCompatActivity() {
             myFile = data?.data
             imageView.setImageURI(data?.data)
             db.storeImage("Uri", myFile.toString())
+
         }
              else {
             Toast.makeText(this, "Image picker action canceled", Toast.LENGTH_SHORT).show()
+
         }
         if(requestCode==2)
         {
             imageView.setImageURI(myFile)
             db.storeImage("Uri", myFile.toString())
-            var collection = db.retrieveAllImages()
-            Toast.makeText(this, "${collection["QHGLIisMwYpKAEtKKZjy"]}", Toast.LENGTH_LONG).show()
+
 
         }
 

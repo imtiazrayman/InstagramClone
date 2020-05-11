@@ -17,11 +17,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.newSingleThreadContext
 
 const val TAG = "PostsActivity"
 const val EXTRA_USERNAME = "EXTRA_USERNAME"
 
 class HomeActivity : AppCompatActivity() {
+    private val scope = CoroutineScope(newSingleThreadContext("name"))
 
     private var signedInUsers: Users? = null
     private lateinit var firestoreDb: FirebaseFirestore
@@ -39,8 +43,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         setupUI();
         configureGoogleSignIn()
-
-        db.retrieveAllImages()
+        scope.launch { retrieveImages() }
 
 
 
@@ -113,6 +116,21 @@ class HomeActivity : AppCompatActivity() {
 
 
 
+    }
+    private suspend fun retrieveImages() {
+        var db =  DB()
+
+        try {
+            val list = db.retrieveAllImages()
+            System.out.println("we are heeeerrreee")
+
+
+            System.out.println("we are heeeerrreee + $list")
+
+        }
+        catch (e: Exception) {
+            Log.d(TAG, "$e") //Don't ignore errors!
+        }
     }
     //sets the google sign in options to default with our web client id (api key)
     private fun configureGoogleSignIn() {
