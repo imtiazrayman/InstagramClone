@@ -26,6 +26,7 @@ const val EXTRA_USERNAME = "EXTRA_USERNAME"
 
 class HomeActivity : AppCompatActivity() {
     private val scope = CoroutineScope(newSingleThreadContext("name"))
+    var arrayList = ArrayList<Any>();
 
     private var signedInUsers: Users? = null
     private lateinit var firestoreDb: FirebaseFirestore
@@ -43,7 +44,15 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         setupUI();
         configureGoogleSignIn()
-        scope.launch { retrieveImages() }
+        scope.launch { arrayList = retrieveImages() as ArrayList<Any>
+            println(arrayList[0])
+            var hash : Map<String, String> = arrayList[0] as Map<String, String>
+            println(hash)
+            println(hash["url"])
+
+        }
+
+
 
 
 
@@ -117,20 +126,22 @@ class HomeActivity : AppCompatActivity() {
 
 
     }
-    private suspend fun retrieveImages() {
+    private suspend fun retrieveImages(): Any? {
         var db =  DB()
-
+        var list: Any? = null;
         try {
-            val list = db.retrieveAllImages()
+            list = db.retrieveAllImages()
             System.out.println("we are heeeerrreee")
 
 
             System.out.println("we are heeeerrreee + $list")
 
+
         }
         catch (e: Exception) {
             Log.d(TAG, "$e") //Don't ignore errors!
         }
+        return list
     }
     //sets the google sign in options to default with our web client id (api key)
     private fun configureGoogleSignIn() {

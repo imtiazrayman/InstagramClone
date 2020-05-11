@@ -69,12 +69,12 @@ class DB {
         var arrayList = ArrayList<Any>()
         for(document in snapshot){
             val image = hashMapOf(
-                "time" to "${document.data["time"]?.let { arrayList.add(it) }}",
-                "type" to "${document.data["type"]?.let { arrayList.add(it) }}",
-                "url" to "${document.data["url"]?.let { arrayList.add(it) }}",
-                "user" to "${document.data["user"]?.let { arrayList.add(it) }}"
+                "time" to "${document.data["time"]}",
+                "type" to "${document.data["type"]}",
+                "url" to "${document.data["url"]}",
+                "user" to "${document.data["user"]}"
             )
-            arrayList.add("end")
+            arrayList.add(image)
 
 
 
@@ -84,31 +84,7 @@ class DB {
     }
     //returns a collection reference to the images
     //still need to work on this
-    fun retrieveAllImages2(): ArrayList<Any> {
-        val arrayList = ArrayList<Any>()
-        var images = db.collection("images")
-            .get()
 
-            .addOnSuccessListener { result ->
-                for (document in result) {
-
-
-
-                    System.out.println("document value...${document.id}")
-                    arrayList.add("${document.id}")
-                    System.out.println("arraylist value...${arrayList}")
-
-                }
-
-            }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "Error getting documents: ", exception)
-            }
-
-        System.out.println("here we are " + arrayList)
-        return arrayList
-
-    }
     //returns a collection reference to the images
     //still need to work on this
     fun retrieveAllVideos(): Task<QuerySnapshot> {

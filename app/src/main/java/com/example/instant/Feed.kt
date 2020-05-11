@@ -11,29 +11,34 @@ import kotlinx.coroutines.newSingleThreadContext
 
 class Feed : AppCompatActivity() {
     private val scope = CoroutineScope(newSingleThreadContext("name"))
+    var arrayList = ArrayList<Any>();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feed)
-        scope.launch { retrieveImages() }
+
+        scope.launch { arrayList = retrieveImages() as ArrayList<Any> }
+        println(arrayList[0])
 
 
 
     }
-    private suspend fun retrieveImages() {
+    private suspend fun retrieveImages(): Any? {
         var db =  DB()
-
+        var list: Any? = null;
         try {
-            val list = db.retrieveAllImages()
+             list = db.retrieveAllImages()
             System.out.println("we are heeeerrreee")
 
 
             System.out.println("we are heeeerrreee + $list")
 
+
         }
         catch (e: Exception) {
             Log.d(TAG, "$e") //Don't ignore errors!
         }
+       return list
     }
     fun goHome(view: View) {}
     fun goSearch(view: View) {}
