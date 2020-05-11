@@ -78,7 +78,7 @@
             android:drawableTint="#FDFDFD"
             android:drawableTintMode="add"
             android:ems="10"
-            android:hint="Username"
+            android:hint="Username(ashok@gmail.com)"
             android:inputType="textPersonName"
             android:textAlignment="center"
             android:textColorHint="#F6F6F6" />
@@ -94,7 +94,7 @@
             android:drawableTintMode="add"
             android:ems="10"
 
-            android:hint="Password"
+            android:hint="Password(123456)"
             android:inputType="textPersonName"
             android:password="false"
             android:textAlignment="center"
