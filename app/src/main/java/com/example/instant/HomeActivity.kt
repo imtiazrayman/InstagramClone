@@ -46,7 +46,7 @@ class HomeActivity : AppCompatActivity() {
 
 
 
-   // var recyclerView : RecyclerView = rvPosts
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -54,48 +54,26 @@ class HomeActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_home)
 
-       // recyclerView = findViewById(R.id.rvPosts);
-       // recyclerView.layoutManager = LinearLayoutManager(this)
-        // Write a message to the database
-        // Write a message to the database
+
 
 
         setupUI();
         configureGoogleSignIn()
 
-        // Read from the database
-        // Read from the database
-        /*myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) { // This method is called once with the initial value and again
-            // whenever data at this location is updated.
-                val value =
-                    dataSnapshot.getValue(String::class.java)!!
-                Log.d(TAG, "Value is: $value")
-                textView5.text = "Value is: $value"
-            }
 
-            override fun onCancelled(error: DatabaseError) { // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException())
-            }
-        })*/
+        scope.launch(Dispatchers.IO) {
+            arrayList = retrieveImages() as ArrayList<Any>
+            withContext(Dispatchers.Main) {updateGui(arrayList)
 
-        GlobalScope.launch(Dispatchers.IO) {
-            val array1 = retrieveImages() as ArrayList<Any>
-            withContext(Dispatchers.Main) {
-                updateGui(array1)
             }
         }
+//
 
 
-        /*scope.launch {
-            arrayList = retrieveImages() as ArrayList<Any>
-            updateGui(arrayList)
 
-            //hash["url"]
-        }*/
     }
 
-    fun updateGui(arrayList: ArrayList<Any>) {
+    private fun updateGui(arrayList: ArrayList<Any>) {
         println(this.arrayList[0])
         // textView5.text = arrayList[0].toString()
 
@@ -105,7 +83,7 @@ class HomeActivity : AppCompatActivity() {
         println(hash["url"])
         imagepath = hash["url"].toString()
         //Log.d("checkurl" , "$imagepath")
-        //textView5.text = hash["url"]
+        textView5.text = hash["url"]
 
 
     }
