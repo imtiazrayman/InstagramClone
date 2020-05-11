@@ -87,19 +87,23 @@ class DB {
 
     //returns a collection reference to the images
     //still need to work on this
-    fun retrieveAllVideos(): Task<QuerySnapshot> {
+    suspend fun retrieveAllVideos(): ArrayList<Any> {
+        val snapshot = db.collection("videos").get().await()
+        var arrayList = ArrayList<Any>()
+        for(document in snapshot){
+            val video = hashMapOf(
+                "time" to "${document.data["time"]}",
+                "type" to "${document.data["type"]}",
+                "url" to "${document.data["url"]}",
+                "user" to "${document.data["user"]}"
+            )
+            arrayList.add(video)
 
-        var videos = db.collection("videos")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "Error getting documents: ", exception)
-            }
-        return videos
+
+
+
+        }
+        return arrayList
     }
 
 
