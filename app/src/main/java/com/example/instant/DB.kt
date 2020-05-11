@@ -1,14 +1,15 @@
 package com.example.instant
 
-import android.content.ContentValues.TAG
 import android.util.Log
-import com.example.instant.models.Posts
+import android.widget.Toast
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
 
 class DB {
 
@@ -19,16 +20,13 @@ class DB {
     //store an image with a given uRL and type of encoding (bitmap or imageurl) and the user who posted it
     //params: type as a string and imageURL as a string
     //stores in firebase db as {images: {imageID : {type, url, user}}}
-    fun storeImage(type: String, imageURL: String , time: String){
+    fun storeImage(type: String, imageURL: String){
         val user  = retrieveCurrentUser()
-        val capturetime = time
         val image = hashMapOf(
             "type" to "${type}",
             "url" to "${imageURL}",
-            "user" to "${user}",
-            "time" to "${capturetime}" // this is added so we can arrange the posts based upon the time sent.
+            "user" to "${user}"
         )
-        Posts(imageURL, user.toString(), capturetime)
 
         // Add a new document with a generated ID
         Log.e("testing", "am I in the db");
@@ -66,43 +64,52 @@ class DB {
     fun retrieveCurrentUser(): String? {
         return FirebaseAuth.getInstance().currentUser?.displayName
     }
-    //returns a collection reference to the images
-    //still need to work on this
-    fun retrieveAllImages(): Task<QuerySnapshot> {
-        var images = db.collection("images")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "Error getting documents: ", exception)
-            }
-        return images
+    suspend fun retrieveAllImages(): ArrayList<Any> {
+        val snapshot = db.collection("images").get().await()
+        var arrayList = ArrayList<Any>()
+        for(document in snapshot){
+            val image = hashMapOf(
+                "time" to "${document.data["time"]}",
+                "type" to "${document.data["type"]}",
+                "url" to "${document.data["url"]}",
+                "user" to "${document.data["user"]}"
+            )
+            arrayList.add(image)
+
+
+
+
+        }
+        return arrayList
     }
     //returns a collection reference to the images
     //still need to work on this
-    fun retrieveAllVideos(): Task<QuerySnapshot> {
-        var videos = db.collection("videos")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "Error getting documents: ", exception)
-            }
-        return videos
+
+    //returns a collection reference to the images
+    //still need to work on this
+    suspend fun retrieveAllVideos(): ArrayList<Any> {
+        val snapshot = db.collection("videos").get().await()
+        var arrayList = ArrayList<Any>()
+        for(document in snapshot){
+            val video = hashMapOf(
+                "time" to "${document.data["time"]}",
+                "type" to "${document.data["type"]}",
+                "url" to "${document.data["url"]}",
+                "user" to "${document.data["user"]}"
+            )
+            arrayList.add(video)
+
+
+
+
+        }
+        return arrayList
     }
+
 
     // this is a small retriever to display the email for the user in the profile activity.
     fun retrieveUserEmail(): String? {
         return FirebaseAuth.getInstance().currentUser?.email
     }
-
-
-
 
 }

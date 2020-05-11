@@ -17,16 +17,21 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.newSingleThreadContext
 
+const val TAG = "PostsActivity"
+const val EXTRA_USERNAME = "EXTRA_USERNAME"
 
 class HomeActivity : AppCompatActivity() {
+    private val scope = CoroutineScope(newSingleThreadContext("name"))
+    var arrayList = ArrayList<Any>();
 
     private var signedInUsers: Users? = null
     private lateinit var firestoreDb: FirebaseFirestore
     private lateinit var posts: MutableList<Posts>
     private lateinit var adapter: PostsAdapter
-
 
     val RC_SIGN_IN: Int = 1
     lateinit var mGoogleSignInClient: GoogleSignInClient
@@ -39,8 +44,17 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         setupUI();
         configureGoogleSignIn()
+        scope.launch { arrayList = retrieveImages() as ArrayList<Any>
+            println(arrayList[0])
+            var hash : Map<String, String> = arrayList[0] as Map<String, String>
+            println(hash)
+            println(hash["url"])
 
-        //db.retrieveAllImages()
+        }
+
+
+
+
 
 
         // This is code that is a test to see if the images are actually being taken in.
@@ -54,28 +68,80 @@ class HomeActivity : AppCompatActivity() {
                 Log.i("HELLO", "Dcoument ${document.id}: ${document.data}")
             }
         }*/
-        //textView5.text = db.retrieveAnImage()
-        firestoreDb = FirebaseFirestore.getInstance()
-        posts = mutableListOf()
+
+
+        // Create the layout file which represents one post - DONE
+        // Create data source - DONE
+
+        /*posts = mutableListOf()
         // Create the adapter
         adapter = PostsAdapter(this, posts)
         // Bind the adapter and layout manager to the RV
         rvPosts.adapter = adapter
         rvPosts.layoutManager = LinearLayoutManager(this)
+        firestoreDb = FirebaseFirestore.getInstance()
+
+        firestoreDb.collection("Users")
+            .document(FirebaseAuth.getInstance().currentUser?.uid as String)
+            .get()
+            .addOnSuccessListener { userSnapshot ->
+                signedInUsers = userSnapshot.toObject(Users::class.java)
+                Log.i(TAG, "signed in user: $signedInUsers")
+            }
+            .addOnFailureListener { exception ->
+                Log.i(TAG, "Failure fetching signed in user", exception)
+            }
+
 
         var postsReference = firestoreDb
-            .collection("images")
+            .collection("posts")
             .limit(20)
+            .orderBy("creation_time_ms", Query.Direction.DESCENDING)
+
+        val username = intent.getStringExtra(EXTRA_USERNAME)
+        if (username != null) {
+            supportActionBar?.title = username
+            postsReference = postsReference.whereEqualTo("Users.username", username)
+        }
+
+        postsReference.addSnapshotListener { snapshot, exception ->
+            if (exception != null || snapshot == null) {
+                Log.e(TAG, "Exception when querying posts", exception)
+                return@addSnapshotListener
+            }
+            val postList = snapshot.toObjects(Posts::class.java)
+            posts.clear()
+            posts.addAll(postList)
+            adapter.notifyDataSetChanged()
+            for (post in postList) {
+
+            }
+        }*/
+
+
+
+
 
 
 
 
     }
+    private suspend fun retrieveImages(): Any? {
+        var db =  DB()
+        var list: Any? = null;
+        try {
+            list = db.retrieveAllImages()
+            System.out.println("we are heeeerrreee")
 
 
-    override fun onStart() {
-        super.onStart()
+            System.out.println("we are heeeerrreee + $list")
 
+
+        }
+        catch (e: Exception) {
+            Log.d(TAG, "$e") //Don't ignore errors!
+        }
+        return list
     }
     //sets the google sign in options to default with our web client id (api key)
     private fun configureGoogleSignIn() {
