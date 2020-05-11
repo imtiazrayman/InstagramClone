@@ -47,7 +47,7 @@
         android:id="@+id/btnLogin"
         android:layout_width="253dp"
         android:layout_height="59dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="52dp"
         android:background="#3EFFFFFF"
         android:fontFamily="sans-serif-medium"
 
@@ -58,7 +58,6 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
