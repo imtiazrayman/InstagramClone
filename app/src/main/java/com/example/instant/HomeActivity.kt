@@ -5,127 +5,118 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.instant.models.Users
 import com.example.instant.models.Posts
+import com.example.instant.models.Users
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.*
+
 
 const val TAG = "PostsActivity"
 const val EXTRA_USERNAME = "EXTRA_USERNAME"
 
 class HomeActivity : AppCompatActivity() {
+
     private val scope = CoroutineScope(newSingleThreadContext("name"))
     var arrayList = ArrayList<Any>();
 
     private var signedInUsers: Users? = null
     private lateinit var firestoreDb: FirebaseFirestore
-    private lateinit var posts: MutableList<Posts>
+    private lateinit var posts:  ArrayList<Posts>
     private lateinit var adapter: PostsAdapter
 
     val RC_SIGN_IN: Int = 1
     lateinit var mGoogleSignInClient: GoogleSignInClient
     lateinit var mGoogleSignInOptions: GoogleSignInOptions
     val db = DB()
+    var imagepath = "Didnt run yet"
+    private lateinit var postKey: String
+    private lateinit var postReference: DatabaseReference
+    private lateinit var commentsReference: DatabaseReference
+    private lateinit var database: DatabaseReference
+
+
+
+
+   // var recyclerView : RecyclerView = rvPosts
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_home)
+
+       // recyclerView = findViewById(R.id.rvPosts);
+       // recyclerView.layoutManager = LinearLayoutManager(this)
+        // Write a message to the database
+        // Write a message to the database
+
+
         setupUI();
         configureGoogleSignIn()
-        scope.launch { arrayList = retrieveImages() as ArrayList<Any>
-            println(arrayList[0])
-            var hash : Map<String, String> = arrayList[0] as Map<String, String>
-            println(hash)
-            println(hash["url"])
 
+        // Read from the database
+        // Read from the database
+        /*myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) { // This method is called once with the initial value and again
+            // whenever data at this location is updated.
+                val value =
+                    dataSnapshot.getValue(String::class.java)!!
+                Log.d(TAG, "Value is: $value")
+                textView5.text = "Value is: $value"
+            }
+
+            override fun onCancelled(error: DatabaseError) { // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException())
+            }
+        })*/
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val array1 = retrieveImages() as ArrayList<Any>
+            withContext(Dispatchers.Main) {
+                updateGui(array1)
+            }
         }
 
 
+        /*scope.launch {
+            arrayList = retrieveImages() as ArrayList<Any>
+            updateGui(arrayList)
 
-
-
-
-        // This is code that is a test to see if the images are actually being taken in.
-        /*firestoreDb = FirebaseFirestore.getInstance()
-        val postReference = firestoreDb.collection("posts") // call the collection called posts
-        postReference.addSnapshotListener{ snapshot, exception ->
-            if(exception != null || snapshot == null){
-                return@addSnapshotListener
-            }
-            for(document in snapshot.documents){
-                Log.i("HELLO", "Dcoument ${document.id}: ${document.data}")
-            }
+            //hash["url"]
         }*/
+    }
 
+    fun updateGui(arrayList: ArrayList<Any>) {
+        println(this.arrayList[0])
+        // textView5.text = arrayList[0].toString()
 
-        // Create the layout file which represents one post - DONE
-        // Create data source - DONE
+        var hash : Map<String, String> = this.arrayList[0] as Map<String, String>
+        println(hash)
 
-        /*posts = mutableListOf()
-        // Create the adapter
-        adapter = PostsAdapter(this, posts)
-        // Bind the adapter and layout manager to the RV
-        rvPosts.adapter = adapter
-        rvPosts.layoutManager = LinearLayoutManager(this)
-        firestoreDb = FirebaseFirestore.getInstance()
-
-        firestoreDb.collection("Users")
-            .document(FirebaseAuth.getInstance().currentUser?.uid as String)
-            .get()
-            .addOnSuccessListener { userSnapshot ->
-                signedInUsers = userSnapshot.toObject(Users::class.java)
-                Log.i(TAG, "signed in user: $signedInUsers")
-            }
-            .addOnFailureListener { exception ->
-                Log.i(TAG, "Failure fetching signed in user", exception)
-            }
-
-
-        var postsReference = firestoreDb
-            .collection("posts")
-            .limit(20)
-            .orderBy("creation_time_ms", Query.Direction.DESCENDING)
-
-        val username = intent.getStringExtra(EXTRA_USERNAME)
-        if (username != null) {
-            supportActionBar?.title = username
-            postsReference = postsReference.whereEqualTo("Users.username", username)
-        }
-
-        postsReference.addSnapshotListener { snapshot, exception ->
-            if (exception != null || snapshot == null) {
-                Log.e(TAG, "Exception when querying posts", exception)
-                return@addSnapshotListener
-            }
-            val postList = snapshot.toObjects(Posts::class.java)
-            posts.clear()
-            posts.addAll(postList)
-            adapter.notifyDataSetChanged()
-            for (post in postList) {
-
-            }
-        }*/
-
-
-
-
-
-
+        println(hash["url"])
+        imagepath = hash["url"].toString()
+        //Log.d("checkurl" , "$imagepath")
+        //textView5.text = hash["url"]
 
 
     }
+
+    override fun onStart() {
+        super.onStart()
+    }
+
+
+
+
     private suspend fun retrieveImages(): Any? {
         var db =  DB()
         var list: Any? = null;
@@ -135,7 +126,7 @@ class HomeActivity : AppCompatActivity() {
 
 
             System.out.println("we are heeeerrreee + $list")
-
+           // textView5.text = "$list"
 
         }
         catch (e: Exception) {
@@ -143,6 +134,8 @@ class HomeActivity : AppCompatActivity() {
         }
         return list
     }
+
+
     //sets the google sign in options to default with our web client id (api key)
     private fun configureGoogleSignIn() {
         mGoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -209,3 +202,5 @@ class HomeActivity : AppCompatActivity() {
 
 
 }
+
+

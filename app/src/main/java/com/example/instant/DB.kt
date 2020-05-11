@@ -20,6 +20,7 @@ class DB {
     //store an image with a given uRL and type of encoding (bitmap or imageurl) and the user who posted it
     //params: type as a string and imageURL as a string
     //stores in firebase db as {images: {imageID : {type, url, user}}}
+
     fun storeImage(type: String, imageURL: String){
         val user  = retrieveCurrentUser()
         val image = hashMapOf(
@@ -75,10 +76,6 @@ class DB {
                 "user" to "${document.data["user"]}"
             )
             arrayList.add(image)
-
-
-
-
         }
         return arrayList
     }
@@ -98,10 +95,6 @@ class DB {
                 "user" to "${document.data["user"]}"
             )
             arrayList.add(video)
-
-
-
-
         }
         return arrayList
     }
