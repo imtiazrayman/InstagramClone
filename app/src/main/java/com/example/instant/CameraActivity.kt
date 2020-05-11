@@ -2,6 +2,7 @@ package com.example.instant
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -10,9 +11,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import com.example.instant.models.Posts
 import kotlinx.android.synthetic.main.activity_camera.*
 
 import java.io.File
+import java.lang.System.currentTimeMillis
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -49,18 +52,21 @@ class CameraActivity : AppCompatActivity() {
             myFile = data?.data
             imageView.setImageURI(data?.data)
             db.storeImage("Uri", myFile.toString())
-
+            Posts(myFile.toString(), db.retrieveCurrentUser().toString(), currentTimeMillis().toString())
+            HomeActivity.path = myFile.toString()
         }
              else {
             Toast.makeText(this, "Image picker action canceled", Toast.LENGTH_SHORT).show()
-
         }
         if(requestCode==2)
         {
             imageView.setImageURI(myFile)
             db.storeImage("Uri", myFile.toString())
-
-
+            HomeActivity.path = myFile.toString()
+        }
+        if(requestCode == 3){
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            imageView.setImageBitmap(imageBitmap)
         }
 
     }

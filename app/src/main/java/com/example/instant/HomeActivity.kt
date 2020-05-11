@@ -6,8 +6,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.instant.models.Posts
 import com.example.instant.models.Users
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -17,8 +18,8 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_camera.*
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.item_post.view.*
 import kotlinx.coroutines.*
 
 
@@ -28,12 +29,14 @@ const val EXTRA_USERNAME = "EXTRA_USERNAME"
 class HomeActivity : AppCompatActivity() {
 
     private val scope = CoroutineScope(newSingleThreadContext("name"))
-    var arrayList = ArrayList<Any>();
+    var arrayList = ArrayList<Any>()
+
+    var myFile:Uri?=null
 
     private var signedInUsers: Users? = null
     private lateinit var firestoreDb: FirebaseFirestore
     private lateinit var posts:  ArrayList<Posts>
-    private lateinit var adapter: PostsAdapter
+    private lateinit var adapter: PostAdapter
 
     val RC_SIGN_IN: Int = 1
     lateinit var mGoogleSignInClient: GoogleSignInClient
@@ -44,39 +47,47 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var postReference: DatabaseReference
     private lateinit var commentsReference: DatabaseReference
     private lateinit var database: DatabaseReference
-
-
-
-
-
+    var arrayList2 = ArrayList<Any>()
+    
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_home)
-
-
-
-
-        setupUI();
+        setupUI()
         configureGoogleSignIn()
 
 
         scope.launch(Dispatchers.IO) {
             arrayList = retrieveImages() as ArrayList<Any>
             withContext(Dispatchers.Main) {updateGui(arrayList)
-
             }
         }
-//
 
+        /*val rvposts = findViewById<View>(R.id.rvPosts) as RecyclerView
+        // Initialize contacts
+        val arr = arrayList as ArrayList<Posts>
+        // Create adapter passing in the sample user data
+        val adapter = PostAdapter(this, arrayList)
+        // Attach the adapter to the recyclerview to populate items
+        rvposts.adapter = adapter
+        // Set layout manager to position the items
+        rvposts.layoutManager = LinearLayoutManager(this)*/
 
 
     }
 
+
+
+
+
+
+
+
+
+
+
     private fun updateGui(arrayList: ArrayList<Any>) {
-        println(this.arrayList[0])
+       println(this.arrayList[0])
         // textView5.text = arrayList[0].toString()
 
         var hash : Map<String, String> = this.arrayList[0] as Map<String, String>
@@ -85,15 +96,21 @@ class HomeActivity : AppCompatActivity() {
         println(hash["url"])
         imagepath = hash["url"].toString()
         //Log.d("checkurl" , "$imagepath")
-        imageView3.setImageURI(Uri.parse(hash["url"].toString()))
-       //textView5.text = hash["url"].toString()
 
-
-
+        ///imageView3.setImageURI(Uri.parse(hash["url"].toString()))
+         textView5.text = hash["url"].toString()
     }
+
+
+
+
+
+
+
 
     override fun onStart() {
         super.onStart()
+        //imageView3.setImageURI(Uri.fromFile("com.google.android.apps.photos.contentprovider/-1/1/content%3A%2F%2Fmedia%2Fexternal%2Fimages%2Fmedia%2F44/ORIGINAL/NONE/image%2Fjpeg/1801464070"))
     }
 
 
@@ -148,6 +165,7 @@ class HomeActivity : AppCompatActivity() {
             })
     }
     companion object {
+        var path = ""
         fun getLaunchIntent(from: Context) = Intent(from, HomeActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         }

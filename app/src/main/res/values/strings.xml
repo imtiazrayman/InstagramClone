@@ -11,4 +11,5 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="congrats_text">You have successfully logged in </string>
     <string name="sign_out_button">Sign Out</string>
+    <string name="textview2">TextView</string>
 </resources>
